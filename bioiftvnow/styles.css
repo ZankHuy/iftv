@@ -25,8 +25,8 @@ body {
     radial-gradient(circle at 80% 80%, rgba(30, 100, 200, 0.45) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
     radial-gradient(circle at 85% 25%, rgba(100, 60, 180, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 15% 75%, rgba(20, 160, 180, 0.3) 0%, transparent 45%);
-  background-color: #0a1628;
+    radial-gradient(circle at 15% 75%, rgba(20, 160, 180, 0.3) 0%, transparent 45%),
+    #0a1628;
   background-size: 200% 200%;
   animation: gradientMove 15s ease-in-out infinite;
 }
