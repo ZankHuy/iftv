@@ -8,56 +8,149 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f2f2f2;
+  background: #0a1628;
   color: #1a1a1a;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
 .bio {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  padding: 40px 16px;
+  overflow: hidden;
 }
 
-.bio__card {
+/* Animated gradient background - covers everything */
+.bio__hero-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.bio__hero-bg span {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bio__hero-bg span:nth-child(1) {
+  width: 60vmax;
+  height: 60vmax;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(192, 39, 45, 0.6) 0%, transparent 70%);
+  animation: float1 12s ease-in-out infinite;
+}
+
+.bio__hero-bg span:nth-child(2) {
+  width: 50vmax;
+  height: 50vmax;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(30, 100, 200, 0.5) 0%, transparent 70%);
+  animation: float2 14s ease-in-out infinite;
+}
+
+.bio__hero-bg span:nth-child(3) {
+  width: 45vmax;
+  height: 45vmax;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+  animation: float3 10s ease-in-out infinite;
+}
+
+.bio__hero-bg span:nth-child(4) {
+  width: 40vmax;
+  height: 40vmax;
+  top: 10%;
+  right: -5%;
+  background: radial-gradient(circle, rgba(100, 60, 180, 0.4) 0%, transparent 70%);
+  animation: float4 16s ease-in-out infinite;
+}
+
+.bio__hero-bg span:nth-child(5) {
+  width: 35vmax;
+  height: 35vmax;
+  bottom: 5%;
+  left: 15%;
+  background: radial-gradient(circle, rgba(20, 160, 180, 0.35) 0%, transparent 70%);
+  animation: float5 13s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8%, 12%) scale(1.1); }
+  66% { transform: translate(-5%, 5%) scale(0.95); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-10%, -8%) scale(1.05); }
+  66% { transform: translate(6%, -12%) scale(1.1); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-12%, 10%) scale(1.08); }
+}
+
+@keyframes float5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(10%, -8%) scale(1.12); }
+  80% { transform: translate(-6%, 5%) scale(0.95); }
+}
+
+/* Content - on top of gradient */
+.bio__content {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
+  padding: 56px 16px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Avatar */
+/* Avatar with circle frame */
 .bio__avatar {
-  width: 96px;
-  height: 96px;
-  margin-bottom: 16px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 2px solid rgba(80, 160, 255, 0.5);
+  box-shadow: 0 0 20px rgba(80, 160, 255, 0.25), 0 0 60px rgba(80, 160, 255, 0.1);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px;
+  margin-bottom: 20px;
 }
 
 .bio__avatar img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
-}
-
-/* Name & Desc */
-.bio__name {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
 }
 
 .bio__desc {
   font-size: 14px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
   line-height: 1.5;
   max-width: 300px;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 /* Link Buttons */
@@ -75,14 +168,15 @@ body {
   gap: 10px;
   width: 100%;
   padding: 16px 20px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   text-decoration: none;
-  color: #1a1a1a;
+  color: #fff;
   font-size: 15px;
   font-weight: 500;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s, background 0.15s;
 }
 
 .bio__link-icon {
@@ -93,7 +187,7 @@ body {
 
 .bio__link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .bio__link:active {
@@ -104,5 +198,5 @@ body {
 .bio__footer {
   margin-top: 32px;
   font-size: 12px;
-  color: #999;
+  color: rgba(255, 255, 255, 0.35);
 }
